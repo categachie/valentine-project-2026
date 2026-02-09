@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Darling Sister Grace</title>
+    <style>
+        :root {
+            --deep-pink: #ff4d6d;
+            --soft-pink: #ffb3c1;
+            --magic-purple: #9d4edd;
+        }
+
+        body {
+            background-color: #fff0f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            transition: background-color 1s;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.2);
+            max-width: 500px;
+            width: 90%;
+            z-index: 10;
+            border: 3px solid var(--soft-pink);
+            position: relative;
+        }
+
+        h1 { color: var(--deep-pink); font-size: 2.2rem; }
+        .proposal-text { color: #594d5b; font-size: 1.4rem; font-style: italic; margin-bottom: 30px; }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+        }
+
+        .btn {
+            background-color: var(--deep-pink);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 11;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            position: absolute;
+            transition: 0.1s ease;
+        }
+
+        #danceParty { display: none; }
+
+        /* The Dancing Animation */
+        .dancing-emoji {
+            position: absolute;
+            font-size: 40px;
+            pointer-events: none;
+            animation: dance 2s infinite alternate ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes dance {
+            from { transform: translateY(0) rotate(-20deg); }
+            to { transform: translateY(-50px) rotate(20deg); }
+        }
+
+        .celebration-text {
+            font-size: 1.5rem;
+            color: var(--magic-purple);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainBox">
+        <div id="askSection">
+            <h1>Grace...</h1>
+            <p class="proposal-text">"Will you be my Valentine or Galentine, my darling loving sister?"</p>
+            <div class="btn-group">
+                <button class="btn" onclick="startTheParty()">YES! ❤️</button>
+                <button class="btn" id="noBtn" onmouseover="runAway()">No 🙄</button>
+            </div>
+        </div>
+
+        <div id="danceParty">
+            <h1 class="celebration-text">YAY! SHE SAID YES! 🎉</h1>
+            <p>You are officially the best sister in the world.</p>
+            <div style="font-size: 50px;">👯‍♀️💖✨</div>
+            <p style="margin-top: 20px; font-weight: bold; color: var(--deep-pink);">Sending you a giant virtual hug!</p>
+        </div>
+    </div>
+
+    <script>
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function startTheParty() {
+            document.getElementById('askSection').style.display = 'none';
+            document.getElementById('danceParty').style.display = 'block';
+            document.body.style.backgroundColor = '#fce4ec';
+            
+            // This creates the dancing icons
+            const symbols = ['💃', '💖', '✨', '🌸', '👯‍♀️', '🌟'];
+            for(let i=0; i<20; i++) {
+                createDancingEmoji(symbols[i % symbols.length]);
+            }
+        }
+
+        function createDancingEmoji(symbol) {
+            const e = document.createElement('div');
+            e.className = 'dancing-emoji';
+            e.innerHTML = symbol;
+            e.style.left = Math.random() * 90 + 'vw';
+            e.style.top = Math.random() * 80 + 'vh';
+            // Give each one a random delay so they don't all jump at once
+            e.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(e);
+        }
+    </script>
+</body>
+</html>
